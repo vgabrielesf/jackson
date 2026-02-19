@@ -216,6 +216,8 @@ const Home = () => {
         }
     }, [modelUrl]);
 
+    const [emailCopied, setEmailCopied] = useState(false);
+
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
             <Header />
@@ -910,14 +912,18 @@ const Home = () => {
                         Entre em contato e vamos conversar!
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-                        <a 
-                            href={`mailto:${portfolioData.personalInfo.email}`}
+                        <button
+                            onClick={() => {
+                                navigator.clipboard.writeText(portfolioData.personalInfo.email);
+                                setEmailCopied(true);
+                                setTimeout(() => setEmailCopied(false), 2000);
+                            }}
                             className="inline-flex items-center gap-2 w-40 justify-center p-3 bg-gray-800 rounded-lg hover:text-green-400 transition-all duration-300 transform hover:scale-110 hover:bg-blue-900 focus:ring-2 focus:ring-blue-400 text-white font-medium shadow-lg"
                             style={{fontFamily: 'Poppins, sans-serif'}}
                         >
                             <FaEnvelope size={22} />
-                             Email
-                        </a>
+                            Email
+                        </button>
                         <a 
                             href="https://www.linkedin.com/in/vitoria-gabriele-s-figueiredo-860bba296"
                             target="_blank"
@@ -939,6 +945,9 @@ const Home = () => {
                             GitHub
                         </a>
                     </div>
+                    {emailCopied && (
+                        <span className="text-green-400 text-sm mt-2 block animate-fadeIn">E-mail copiado!</span>
+                    )}
                 </div>
             </section>
 

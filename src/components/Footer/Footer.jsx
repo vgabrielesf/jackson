@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLinkedin, FaGithub, FaEnvelope, FaHeart } from 'react-icons/fa';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
+    const [copied, setCopied] = useState(false);
 
     const socialLinks = [
         {
             name: 'LinkedIn',
             icon: FaLinkedin,
             url: 'https://www.linkedin.com/in/vitoria-gabriele-s-figueiredo-860bba296',
-            color: 'hover:text-blue-400'
+            color: 'hover:text-blue-400',
+            onClick: null
         },
         {
             name: 'GitHub',
             icon: FaGithub,
             url: 'https://github.com/vgabrielesf/',
-            color: 'hover:text-gray-400'
+            color: 'hover:text-gray-400',
+            onClick: null
         },
         {
             name: 'Email',
             icon: FaEnvelope,
-            url: 'mailto:vitoria@exemplo.com',
-            color: 'hover:text-green-400'
+            url: null, // Não usa mais mailto
+            color: 'hover:text-green-400',
+            onClick: (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText('vgabrielesf@gmail.com');
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            }
         }
     ];
 
@@ -77,18 +86,22 @@ const Footer = () => {
                                 return (
                                     <a
                                         key={social.name}
-                                        href={social.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                        href={social.url || '#'}
+                                        target={social.url ? '_blank' : undefined}
+                                        rel={social.url ? 'noopener noreferrer' : undefined}
                                         className={`p-3 bg-gray-900 border-2 border-gray-700 rounded-lg ${social.color} transition-all duration-300 transform hover:scale-125 hover:bg-blue-900 focus:ring-2 focus:ring-blue-400 animate-bounce`}
                                         aria-label={social.name}
                                         style={{animationDelay: `${idx * 0.1}s`}}
+                                        onClick={social.onClick}
                                     >
                                         <IconComponent size={22} />
                                     </a>
                                 );
                             })}
                         </div>
+                        {copied && (
+                            <span className="text-green-400 text-sm mt-2 block animate-fadeIn">E-mail copiado!</span>
+                        )}
                     </div>
                 </div>
 
