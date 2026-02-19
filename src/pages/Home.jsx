@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Stage, Float } from '@react-three/drei';
 import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
 import Header from '../components/Header/Header';
@@ -49,21 +49,19 @@ function Model3D({ url, scale = 1.2, initialRotation = [0, 0, 0] }) {
         }
     }, [initialRotation]);
 
-    useFrame((state) => {
-        if (meshRef.current) {
-            const { x, y } = state.mouse;
-            meshRef.current.rotation.y = initialRotation[1] + x * 0.4;
-            meshRef.current.rotation.x = initialRotation[0] - y * 0.2;
-        }
-    });
-
     return <primitive ref={meshRef} object={scene} scale={scale} />;
 }
 
 const Home = () => {
     const [selectedItem, setSelectedItem] = useState(null);
-    // Estado para alternar entre os modelos 3D
-    const [modelUrl, setModelUrl] = useState(process.env.PUBLIC_URL + '/assets/model7.glb');
+    // Modelos 3D disponíveis
+    const modelList = [
+        process.env.PUBLIC_URL + '/assets/model7.glb',
+        process.env.PUBLIC_URL + '/assets/empurrador.glb',
+        process.env.PUBLIC_URL + '/assets/motor.glb',
+    ];
+    const [modelIndex, setModelIndex] = useState(0);
+    const modelUrl = modelList[modelIndex];
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedEducationType, setSelectedEducationType] = useState('superior');
     const [currentCertificateIndex, setCurrentCertificateIndex] = useState(0);
@@ -201,6 +199,22 @@ const Home = () => {
         setIsModalOpen(false);
         setSelectedItem(null);
     };
+
+    // Funções para trocar de modelo
+    const nextModel = () => setModelIndex((prev) => (prev + 1) % modelList.length);
+    const prevModel = () => setModelIndex((prev) => (prev - 1 + modelList.length) % modelList.length);
+
+    const modelNames = ['Boat', 'Rebocador', 'Motor'];
+
+    // Ref para OrbitControls
+    const orbitRef = useRef();
+
+    useEffect(() => {
+        // Resetar zoom e posição ao trocar de modelo
+        if (orbitRef.current) {
+            orbitRef.current.reset();
+        }
+    }, [modelUrl]);
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
@@ -722,28 +736,38 @@ const Home = () => {
                         
                         {/* Categories */}
                         <div className="flex justify-center gap-8 mb-8">
-                            <button 
-                                onClick={() => setSelectedCategory('aplicativos')}
-                                className={`text-lg md:text-xl font-semibold transition-all duration-300 ${
-                                    selectedCategory === 'aplicativos'
-                                        ? 'text-blue-600 dark:text-blue-400'
-                                        : 'text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-300'
-                                }`} 
-                                style={{fontFamily: 'Poppins, sans-serif'}}
-                            >
-                                Aplicativos
-                            </button>
-                            <button 
-                                onClick={() => setSelectedCategory('rendering')}
-                                className={`text-lg md:text-xl font-semibold transition-all duration-300 ${
-                                    selectedCategory === 'rendering'
-                                        ? 'text-blue-600 dark:text-blue-400'
-                                        : 'text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-300'
-                                }`} 
-                                style={{fontFamily: 'Poppins, sans-serif'}}
-                            >
-                                Projetos
-                            </button>
+                            <div className="flex flex-col items-center">
+                                <button 
+                                    onClick={() => setSelectedCategory('aplicativos')}
+                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${
+                                        selectedCategory === 'aplicativos'
+                                            ? 'text-blue-600 dark:text-blue-400'
+                                            : 'text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-300'
+                                    }`} 
+                                    style={{fontFamily: 'Poppins, sans-serif'}}
+                                >
+                                    Aplicativos
+                                </button>
+                                {selectedCategory === 'aplicativos' && (
+                                    <div className="w-full h-1 bg-blue-600 dark:bg-blue-400 rounded mt-1"></div>
+                                )}
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <button 
+                                    onClick={() => setSelectedCategory('rendering')}
+                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${
+                                        selectedCategory === 'rendering'
+                                            ? 'text-blue-600 dark:text-blue-400'
+                                            : 'text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-300'
+                                    }`} 
+                                    style={{fontFamily: 'Poppins, sans-serif'}}
+                                >
+                                    Projetos
+                                </button>
+                                {selectedCategory === 'rendering' && (
+                                    <div className="w-full h-1 bg-blue-600 dark:bg-blue-400 rounded mt-1"></div>
+                                )}
+                            </div>
                         </div>
                     </div>
 
@@ -755,9 +779,7 @@ const Home = () => {
                                 <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
                                     <div className="flex items-start space-x-3">
                                         <div className="flex-shrink-0">
-                                            <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                                            </svg>
+                                            <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v16m16-8H4" /></svg>
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-sm font-medium text-blue-800 dark:text-blue-800" style={{fontFamily: 'Poppins, sans-serif'}}>
@@ -799,83 +821,84 @@ const Home = () => {
 
                     {/* Seção do modelo 3D do motor */}
                     <section id="motor3d" className="py-20 bg-white dark:bg-gray-800">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                        <h2 className="text-2xl md:text-3xl text-gray-900 dark:text-white mb-6" style={{fontFamily: 'Poppins, sans-serif'}}>
-                        Visualizador 3D de Modelos
-                        </h2>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-                        Interaja com diferentes modelos 3D abaixo. Arraste para girar e use o scroll para aproximar.
-                        </p>
-                        <div className="flex flex-col items-center gap-2 mb-6">
-                        <div className="text-sm text-gray-500 dark:text-gray-400">Arraste para girar, role para dar zoom, segure shift para mover</div>
-                        <button
-                            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
-                            onClick={() => setModelUrl(modelUrl.includes('model7.glb') ? process.env.PUBLIC_URL + '/assets/motor.glb' : process.env.PUBLIC_URL + '/assets/model7.glb')}
-                        >
-                              Trocar de modelo
-                        </button>
-                        </div>
-                        {/* Renderiza ambos os modelos, mas só mostra o selecionado, cada um com seu Canvas e OrbitControls independentes */}
-                        <div className="w-full rounded-lg shadow-lg flex items-center justify-center" style={{height: '50vw', maxHeight: '600px', minHeight: '350px', background: 'transparent'}}>
-                        <Suspense fallback={<span className="text-gray-500">Carregando modelo 3D...</span>}>
-                            {modelUrl.includes('motor.glb') && (
-                                <Canvas camera={{ position: [3, 2, 7], fov: 40 }} shadows>
-                                    <ambientLight intensity={0.6} color={0xffffff} />
-                                    <hemisphereLight skyColor={0xffffff} groundColor={0xbbbbbb} intensity={0.8} position={[0, 50, 0]} />
-                                    <directionalLight position={[5, 10, 7]} intensity={1.2} castShadow={false} />
-                                    <directionalLight position={[-5, 5, -5]} intensity={0.6} />
-                                    <directionalLight position={[0, 5, -10]} intensity={0.4} />
-                                    <pointLight position={[10, 10, 10]} intensity={0.6} distance={50} />
-                                    <pointLight position={[-10, 10, -10]} intensity={0.6} distance={50} />
-                                    <group position={[0, -0.2, 0]}>
-                                        <Model3D url={process.env.PUBLIC_URL + "/assets/motor.glb"} scale={2.0} />
-                                        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.1, 0]}>
-                                            <planeGeometry args={[8, 8]} />
-                                            <shadowMaterial opacity={0.3} />
-                                        </mesh>
-                                    </group>
-                                    <OrbitControls 
-                                        enablePan={true}
-                                        enableZoom={true}
-                                        minDistance={2}
-                                        maxDistance={10}
-                                        maxPolarAngle={Math.PI / 1.7}
-                                        minPolarAngle={Math.PI / 3.5}
-                                        makeDefault
-                                    />
-                                </Canvas>
-                            )}
-                            {modelUrl.includes('model7.glb') && (
-                                <Canvas camera={{ position: [3, 5, 7], fov: 40 }} shadows>
-                                    <ambientLight intensity={0.6} color={0xffffff} />
-                                    <hemisphereLight skyColor={0xffffff} groundColor={0xbbbbbb} intensity={0.8} position={[0, 50, 0]} />
-                                    <directionalLight position={[5, 10, 7]} intensity={1.2} castShadow={false} />
-                                    <directionalLight position={[-5, 5, -5]} intensity={0.6} />
-                                    <directionalLight position={[0, 5, -10]} intensity={0.4} />
-                                    <pointLight position={[10, 10, 10]} intensity={0.6} distance={50} />
-                                    <pointLight position={[-10, 10, -10]} intensity={0.6} distance={50} />
-                                    <group position={[0, -0.2, 0]}>
-                                        <Model3D url={process.env.PUBLIC_URL + "/assets/model7.glb"} scale={0.5} initialRotation={[0.18, -0.5, 0]} />
-                                        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.1, 0]}>
-                                            <planeGeometry args={[8, 8]} />
-                                            <shadowMaterial opacity={0.3} />
-                                        </mesh>
-                                    </group>
-                                    <OrbitControls 
-                                        enablePan={true}
-                                        enableZoom={true}
-                                        minDistance={2}
-                                        maxDistance={10}
-                                        maxPolarAngle={Math.PI / 1.7}
-                                        minPolarAngle={Math.PI / 3.5}
-                                        makeDefault
-                                    />
-                                </Canvas>
-                            )}
-                        </Suspense>
-                        </div>
-                </div>
-                  </section>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-2xl md:text-3xl text-gray-900 dark:text-white mb-6" style={{fontFamily: 'Poppins, sans-serif'}}>
+            Visualizador 3D de Modelos
+        </h2>
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-4 max-w-2xl mx-auto">
+            Interaja com diferentes modelos 3D abaixo.
+        </p>
+        <div className="flex flex-col items-center gap-2 mb-6">
+            <div className="flex flex-row items-center gap-3 text-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg px-4 py-2 mb-2">
+                {/* Arraste para girar */}
+                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364-7.364l-1.414 1.414M6.05 17.95l-1.414 1.414M17.95 17.95l-1.414-1.414M6.05 6.05L4.636 4.636" />
+                </svg>
+                <span className="text-blue-700 dark:text-blue-700">Arraste para girar</span>
+                {/* Role para dar zoom */}
+                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="11" y1="7" x2="11" y2="15" />
+                    <line x1="7" y1="11" x2="15" y2="11" />
+                </svg>
+                <span className="text-blue-700 dark:text-blue-700">Role para dar zoom</span>
+                {/* Segure shift para mover */}
+                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" />
+                </svg>
+                <span className="text-blue-700 dark:text-blue-700">Segure shift para mover</span>
+            </div>
+            <div className="flex gap-2 mt-2">
+                <button
+                    className="px-4 py-2 rounded-xl bg-blue-600 text-white font-semibold shadow-xl transition-all duration-200 transform hover:-translate-y-1 hover:scale-110 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2"
+                    onClick={prevModel}
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                    Anterior
+                </button>
+                <span className="text-base font-medium text-blue-700 dark:text-blue-300 mx-2" style={{fontFamily: 'Poppins, sans-serif'}}>{modelNames[modelIndex]}</span>
+                <button
+                    className="px-4 py-2 rounded-xl bg-blue-600 text-white font-semibold shadow-xl transition-all duration-200 transform hover:-translate-y-1 hover:scale-110 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2"
+                    onClick={nextModel}
+                >
+                    Próximo
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </button>
+            </div>
+        </div>
+        <div className="w-full rounded-lg shadow-lg flex items-center justify-center" style={{height: '50vw', maxHeight: '600px', minHeight: '350px', background: 'transparent'}}>
+            <Suspense fallback={<span className="text-gray-500">Carregando modelo 3D...</span>}>
+                <Canvas camera={{ position: [3, 2, 7], fov: 40 }} shadows>
+                    <ambientLight intensity={0.6} color={0xffffff} />
+                    <hemisphereLight skyColor={0xffffff} groundColor={0xbbbbbb} intensity={0.8} position={[0, 50, 0]} />
+                    <directionalLight position={[5, 10, 7]} intensity={1.2} castShadow={false} />
+                    <directionalLight position={[-5, 5, -5]} intensity={0.6} />
+                    <directionalLight position={[0, 5, -10]} intensity={0.4} />
+                    <pointLight position={[10, 10, 10]} intensity={0.6} distance={50} />
+                    <pointLight position={[-10, 10, -10]} intensity={0.6} distance={50} />
+                    <group position={[0, -0.2, 0]}>
+                        <Model3D url={modelUrl} scale={modelUrl.includes('model7.glb') ? 0.5 : modelUrl.includes('empurrador.glb') ? 0.6 : 2.0} initialRotation={modelUrl.includes('model7.glb') ? [0.18, -0.5, 0] : [0, 0, 0]} />
+                        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.1, 0]}>
+                            <planeGeometry args={[8, 8]} />
+                            <shadowMaterial opacity={0.3} />
+                        </mesh>
+                    </group>
+                    <OrbitControls 
+                        ref={orbitRef}
+                        enablePan={true}
+                        enableZoom={true}
+                        minDistance={2}
+                        maxDistance={10}
+                        maxPolarAngle={Math.PI / 1.7}
+                        minPolarAngle={Math.PI / 3.5}
+                        makeDefault
+                    />
+                </Canvas>
+            </Suspense>
+        </div>
+    </div>
+</section>
 
             {/* Contact Section */}
             <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
