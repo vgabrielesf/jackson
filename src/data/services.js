@@ -7,7 +7,7 @@ export const portfolioData = {
     title: 'Desenvolvedora Full Stack',
     bio: 'Desenvolvedora apaixonada por tecnologia com experiência em React, Node.js e desenvolvimento web moderno. Sempre em busca de novos desafios e oportunidades de aprendizado.',
     location: 'Brasil',
-    email: 'vitoria@exemplo.com',
+    email: 'vgabrielesf@gmail.com',
     linkedin: 'https://linkedin.com/in/vitoria-gabriele',
     github: 'https://github.com/vitoriagabriele'
   }
