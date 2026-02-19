@@ -352,7 +352,7 @@ const Home = () => {
                                                     : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600'
                                             }`}
                                         >
-                                            Superior
+                                            Nível Superior
                                         </button>
                                         <button 
                                             onClick={() => setSelectedEducationType('tecnico')}
@@ -362,7 +362,7 @@ const Home = () => {
                                                     : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600'
                                             }`}
                                         >
-                                            Técnico
+                                           Nível Técnico
                                         </button>
                                     </div>
 
@@ -762,7 +762,7 @@ const Home = () => {
                                     }`} 
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
-                                    Projetos
+                                    Projetos de Engenharia e Design
                                 </button>
                                 {selectedCategory === 'rendering' && (
                                     <div className="w-full h-1 bg-blue-600 dark:bg-blue-400 rounded mt-1"></div>
@@ -787,7 +787,7 @@ const Home = () => {
                                             </h3>
                                             <p className="mt-1 text-sm text-blue-700 dark:text-blue-700" style={{fontFamily: 'Poppins, sans-serif'}}>
                                                 As imagens são carregadas conforme você navega para proporcionar a melhor qualidade visual. 
-                                                Aguarde alguns segundos para o carregamento completo das renderizações em alta resolução.
+                                                Aguarde alguns segundos para o carregamento completo.
                                             </p>
                                         </div>
                                     </div>
@@ -878,7 +878,11 @@ const Home = () => {
                     <pointLight position={[10, 10, 10]} intensity={0.6} distance={50} />
                     <pointLight position={[-10, 10, -10]} intensity={0.6} distance={50} />
                     <group position={[0, -0.2, 0]}>
-                        <Model3D url={modelUrl} scale={modelUrl.includes('model7.glb') ? 0.5 : modelUrl.includes('empurrador.glb') ? 0.6 : 2.0} initialRotation={modelUrl.includes('model7.glb') ? [0.18, -0.5, 0] : [0, 0, 0]} />
+                        <Model3D 
+    url={modelUrl} 
+    scale={modelUrl.includes('model7.glb') ? 0.5 : modelUrl.includes('empurrador.glb') ? 0.75 : 2.0}
+    initialRotation={modelUrl.includes('model7.glb') || modelUrl.includes('empurrador.glb') ? [0.18, -0.5, 0] : [0, 0, 0]}
+                        />
                         <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.1, 0]}>
                             <planeGeometry args={[8, 8]} />
                             <shadowMaterial opacity={0.3} />

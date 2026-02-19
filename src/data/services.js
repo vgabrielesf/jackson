@@ -127,15 +127,14 @@ export const renderingImages = [
     },
     {
         src: process.env.PUBLIC_URL + "/assets/CARRO1.jpg", 
-        alt: "Carro para transporte de GNs",
+        alt: "Carro para transporte de GNs Inox",
         isLarge: false
     },
     {
         src: process.env.PUBLIC_URL + "/assets/CARROCANTONEIRA.jpg",
-        alt: "Carro Cantoneira",
+        alt: "Carro Cantoneira Inox",
         isLarge: false
     },
-    
     // 2º Grupo - Imagem Grande: Projeto Naval Boat + 4 pequenas
     {
         src: process.env.PUBLIC_URL + "/assets/boat.png",
@@ -144,53 +143,25 @@ export const renderingImages = [
     },
     {
         src: process.env.PUBLIC_URL + "/assets/95 - CARRO P. TRANSPORTE DE BANDEJAS.jpg",
-        alt: "Carro para Transporte de Bandejas",
+        alt: "Carro para Transporte de Bandejas Inox",
         isLarge: false
     },
     {
         src: process.env.PUBLIC_URL + "/assets/MÓDULO - 07.jpg",
-        alt: "Módulo 2",
+        alt: "Módulo Bar Inox",
         isLarge: false
     },
     {
         src: process.env.PUBLIC_URL + "/assets/BASE.jpg",
-        alt: "Base para GNs",
+        alt: "Base para GNs Inox",
         isLarge: false
     },
     {
         src: process.env.PUBLIC_URL + "/assets/BANCADA COMCUBA.jpg",
-        alt: "Bancada com Cuba",
+        alt: "Bancada com Cuba Inox",
         isLarge: false
     },
-    
-    // 3º Grupo - Imagem Grande: Esteira + 4 pequenas
-    {
-        src: process.env.PUBLIC_URL + "/assets/esteira.png",
-        alt: "Esteira",
-        isLarge: true
-    },
-    {
-        src: process.env.PUBLIC_URL + "/assets/ESTANTE.jpg",
-        alt: "Estante",
-        isLarge: false
-    },
-    {
-        src: process.env.PUBLIC_URL + "/assets/GRELHAPARADRINK.jpg",
-        alt: "Grelha para Drink",
-        isLarge: false
-    },
-    {
-        src: process.env.PUBLIC_URL + "/assets/ARMARIOCOMTRES.jpg",
-        alt: "Armário com Três Compartimentos",
-        isLarge: false
-    },
-    {
-        src: process.env.PUBLIC_URL + "/assets/escada.png",
-        alt: "Escada com Rodízios",
-        isLarge: false
-    },
-    
-    // 4º Grupo - Imagem Grande: Módulo 1 Vista 1 + restantes (2 imagens)
+    // 3º Grupo - Módulo 1 + vistas + escada + estante
     {
         src: process.env.PUBLIC_URL + "/assets/Módulo 1 - Posição 1 - Logo.png",
         alt: "Módulo 1 - Vista 1",
@@ -205,6 +176,32 @@ export const renderingImages = [
         src: process.env.PUBLIC_URL + "/assets/Módulo 1 - Posição 3 - Logo.png",
         alt: "Módulo 1 - Vista 3",
         isLarge: false
+    },
+    {
+        src: process.env.PUBLIC_URL + "/assets/escada.png",
+        alt: "Escada com Rodízios",
+        isLarge: false
+    },
+    {
+        src: process.env.PUBLIC_URL + "/assets/ESTANTE.jpg",
+        alt: "Estante Inox",
+        isLarge: false
+    },
+    // 4º Grupo - Esteira
+    {
+        src: process.env.PUBLIC_URL + "/assets/esteira.png",
+        alt: "Esteira",
+        isLarge: true
+    },
+    {
+        src: process.env.PUBLIC_URL + "/assets/GRELHAPARADRINK.jpg",
+        alt: "Grelha para Drink",
+        isLarge: false
+    },
+    {
+        src: process.env.PUBLIC_URL + "/assets/ARMARIOCOMTRES.jpg",
+        alt: "Armário com Três Compartimentos Inox",
+        isLarge: false
     }
 ];
 
@@ -213,8 +210,8 @@ export const contact = [
     id: 1,
     icon: FaEnvelope,
     title: 'Email',
-    value: 'vitoria@exemplo.com',
-    link: 'mailto:vitoria@exemplo.com',
+    value: 'vgabrielesf@gmail.com',
+    link: 'mailto:vgabrielesf@gmail.com',
     description: 'Entre em contato por email para oportunidades profissionais.'
   }
 ];
