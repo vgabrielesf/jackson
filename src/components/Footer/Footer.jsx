@@ -9,14 +9,14 @@ const Footer = () => {
         {
             name: 'LinkedIn',
             icon: FaLinkedin,
-            url: 'https://www.linkedin.com/in/vitoria-gabriele-s-figueiredo-860bba296',
+            url: 'https://www.linkedin.com/in/jackson-n-rocha-44b574157/',
             color: 'hover:text-blue-400',
             onClick: null
         },
         {
             name: 'GitHub',
             icon: FaGithub,
-            url: 'https://github.com/vgabrielesf/',
+            url: 'https://github.com/jacksonnr2',
             color: 'hover:text-gray-400',
             onClick: null
         },
@@ -27,7 +27,7 @@ const Footer = () => {
             color: 'hover:text-green-400',
             onClick: (e) => {
                 e.preventDefault();
-                navigator.clipboard.writeText('vgabrielesf@gmail.com');
+                navigator.clipboard.writeText('Jackson_n_r@hotmail.com');
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
             }
@@ -35,22 +35,22 @@ const Footer = () => {
     ];
 
     return (
-        <footer className="bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900 dark:from-black dark:via-gray-900 dark:to-gray-900 text-white shadow-2xl">
+        <footer className="bg-gradient-to-br from-black via-gray-900 to-gray-900 text-white shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                     {/* Personal Info */}
                     <div className="space-y-4 flex flex-col justify-start items-start md:justify-start md:items-start">
-                        <h4 className="text-xl  text-blue-400 mb-2 tracking-wide">Vitória Gabriele</h4>
+                        <h4 className="text-xl  text-blue-400 mb-2 tracking-wide">Jackson N. Rocha</h4>
                         <div className="text-gray-400 text-sm space-y-1 mt-2">
-                            <p>vgabrielesf@gmail.com</p>
+                            <p>Jackson_n_r@hotmail.com</p>
                             <p>Fortaleza, CE - Brasil</p>
-                            <p>https://www.linkedin.com/in/vitoria-gabriele-s-figueiredo-860bba296/</p>
+                            <p>https://www.linkedin.com/in/jackson-n-rocha-44b574157/</p>
                         </div>
                     </div>
 
                     {/* Quick Links */}
                     <div className="space-y-4 flex flex-col justify-center items-start">
-                        <h4 className="text-lg font-semibold text-pink-400 mb-2">Links Rápidos</h4>
+                        <h4 className="text-lg font-semibold text-yellow-400 mb-2">Links Rápidos</h4>
                         <div className="grid grid-cols-2 gap-x-8 gap-y-2">
                             <div className="space-y-2">
                                 <a href="#home" className="block text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium">
@@ -79,7 +79,7 @@ const Footer = () => {
 
                     {/* Social Links */}
                     <div className="space-y-4 flex flex-col justify-center items-start">
-                        <h4 className="text-lg font-semibold text-purple-400 mb-2">Conecte-se Comigo</h4>
+                        <h4 className="text-lg font-semibold text-yellow-600 mb-2">Conecte-se Comigo</h4>
                         <div className="flex space-x-4">
                             {socialLinks.map((social, idx) => {
                                 const IconComponent = social.icon;
@@ -108,7 +108,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
                     <p className="text-gray-400 text-sm">
-                        © {currentYear} Vitória Gabriele. Todos os direitos reservados.
+                        © {currentYear} Jackson N. Rocha. Todos os direitos reservados.
                     </p>
                     <p className="text-gray-400 text-sm flex items-center mt-2 md:mt-0">
                         Feito por Vitória Gabriele

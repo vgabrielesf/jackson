@@ -25,8 +25,8 @@ const Header = () => {
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <h1 className="text-2xl text-blue-600 dark:text-blue-400" style={{fontFamily: 'Poppins, sans-serif', fontWeight: 'normal'}}>
-                            &lt;VG&gt;
+                        <h1 className="text-2xl text-yellow-500 dark:text-yellow-400" style={{fontFamily: 'Poppins, sans-serif', fontWeight: 'normal'}}>
+                            &lt;JR&gt;
                         </h1>
                     </div>
 
@@ -36,7 +36,7 @@ const Header = () => {
                             <a
                                 key={item.name}
                                 href={item.href}
-                                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                                className="text-gray-700 dark:text-gray-300 hover:text-yellow-500 dark:hover:text-yellow-400 px-3 py-2 text-sm font-medium transition-colors duration-200"
                             >
                                 {item.name}
                             </a>
@@ -74,7 +74,7 @@ const Header = () => {
                             <a
                                 key={item.name}
                                 href={item.href}
-                                className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md text-sm font-medium transition-colors duration-200"
+                                className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md text-sm font-medium transition-colors duration-200"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 {item.name}

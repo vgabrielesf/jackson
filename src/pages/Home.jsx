@@ -217,31 +217,46 @@ const Home = () => {
     }, [modelUrl]);
 
     const [emailCopied, setEmailCopied] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const [selectedPortfolioTab, setSelectedPortfolioTab] = useState('rendering');
+
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText('Jackson_n_r@hotmail.com');
+        setEmailCopied(true);
+        setTimeout(() => setEmailCopied(false), 2000);
+    };
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
             <Header />
             
             {/* Hero Section */}
-            <section id="home" className="pt-16 bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-800 text-white">
+            <section id="home" className="pt-16 bg-gradient-to-r from-blue-900 via-blue-950 to-blue-950 text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                     <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
                         {/* Lado esquerdo - Texto */}
                         <div className="flex-1 text-left">
                             <h1 className="text-xl md:text-3xl mb-4 animate-slide-up" style={{fontFamily: 'Poppins, sans-serif'}}>
-                                Olá, sou a 
+                                Olá, sou o
                             </h1>
                             <h2 className="text-3xl md:text-5xl mb-4 animate-slide-up text-orange-400" style={{fontFamily: 'Poppins, sans-serif'}}>
-                                <Typewriter text="Vitória Gabriele" speed={120} pause={1200} />
+                                <Typewriter text="Jackson Rocha" speed={120} pause={1200} />
                             </h2>
                             <h3 className="text-xl md:text-2xl mb-8 text-blue-100 animate-slide-up" style={{fontFamily: 'Poppins, sans-serif'}}>
-                                Desenhista | Full Stack Developer
+                                Desenhista | Developer
                             </h3>
                             <div className="flex flex-row gap-4 animate-slide-up justify-start">
                                 {/* Botões responsivos: Currículo no mobile, extra no desktop */}
                                 <a 
                                     href="#portfolio"
-                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-7 py-3 rounded-xl font-semibold text-base shadow-xl transition-all duration-200 transform hover:-translate-y-1 hover:scale-110 hover:from-blue-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 via-blue-500 to-blue-700 text-white px-7 py-3 rounded-xl font-semibold text-base border-2 border-white shadow-2xl shadow-blue-950 transition-all duration-200 transform hover:-translate-y-1 hover:scale-110 hover:from-orange-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
                                     <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7-7 7M5 5v14" /></svg>
@@ -249,9 +264,9 @@ const Home = () => {
                                 </a>
                                 {/* Mobile: Currículo substitui contato */}
                                 <a 
-                                    href="/assets/Vitória Gabriele da Silva Figueiredo.pdf"
-                                    download="Vitória_Gabriele_Curriculo.pdf"
-                                    className="inline-flex items-center gap-2 border-2 border-pink-400 text-pink-500 bg-white dark:bg-gray-900 hover:bg-pink-500 hover:text-white px-7 py-3 rounded-xl font-semibold text-base shadow-lg transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 block md:hidden"
+                                    href="/assets/Jackson Rocha - Curriculo.pdf"
+                                    download="Jackson_Rocha_Curriculo.pdf"
+                                    className="inline-flex items-center gap-2 border-2 border-blue-950 text-orange-500 bg-white dark:bg-gray-900 hover:bg-orange-500 hover:text-white px-7 py-3 rounded-xl font-semibold text-base shadow-lg transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 block md:hidden"
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
                                     <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
@@ -269,9 +284,9 @@ const Home = () => {
                                     LinkedIn
                                 </a>
                                 <a 
-                                    href="/assets/Vitória Gabriele da Silva Figueiredo.pdf"
-                                    download="Vitória_Gabriele_Curriculo.pdf"
-                                    className="inline-flex items-center gap-2 border-2 border-pink-400 text-pink-500 bg-white dark:bg-gray-900 hover:bg-pink-500 hover:text-white px-7 py-3 rounded-xl font-semibold text-base shadow-lg transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 hidden md:inline-flex"
+                                    href="/assets/Jackson Rocha - Curriculo.pdf"
+                                    download="Jackson_Rocha_Curriculo.pdf"
+                                    className="inline-flex items-center gap-2 border-2 border-blue-400 text-blue-500 bg-white dark:bg-gray-900 hover:bg-blue-600 hover:text-white px-7 py-3 rounded-xl font-semibold text-base shadow-lg transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 hidden md:inline-flex"
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
                                     <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
@@ -282,8 +297,8 @@ const Home = () => {
 
                         {/* Lado direito - Avatar */}
                         <div className="hidden lg:flex flex-shrink-0 lg:ml-12">
-                            <div className="w-40 h-40 lg:w-48 lg:h-48 bg-white/20 rounded-full flex items-center justify-center animate-slide-up backdrop-blur-sm border-4 border-white/30">
-                                <span className="text-5xl lg:text-6xl text-white" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 400 }}>VG</span>
+                            <div className="w-40 h-40 lg:w-48 lg:h-48 bg-transparent rounded-full flex items-center justify-center animate-slide-up border-4 border-yellow-500">
+                                <span className="text-5xl lg:text-6xl text-yellow-500" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 400 }}>JR</span>
                             </div>
                         </div>
                     </div>
@@ -298,18 +313,16 @@ const Home = () => {
                             Sobre Mim
                         </h2>
                         <p className="text-[18px] md:text-[18px] text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2 text-justify lg:text-center">
-                            Desenhista e desenvolvedora Full Stack com experiência em projetos técnicos. Atuo na criação de desenhos e modelagens, além do desenvolvimento de aplicações web e mobile, tanto no frontend quanto no backend. Busco sempre desenvolver soluções bem estruturadas, com atenção aos detalhes e foco em uma experiência de uso intuitiva, funcional e eficiente.
+                            Desenhista naval e estrutural, com atuação em modelagem 3D e documentação técnica para fabricação, principalmente no contexto industrial e naval. Experiência no desenvolvimento de projetos em Rhinoceros 3D, acompanhando o processo desde a concepção até a geração de desenhos técnicos e suporte à montagem. Tenho como diferencial a automação de processos dentro do ambiente de projeto, utilizando Python para reduzir tarefas manuais, padronizar modelos, extrair dados e minimizar erros recorrentes na documentação.
                         </p>
                     </div>
-                    
                     <div className="flex flex-col lg:flex-row gap-12 items-center lg:items-start">
                         <div className="flex-1 w-full lg:w-1/2 flex flex-col items-center">
                             <h3 className="text-2xl md:text-3xl text-gray-900 dark:text-white mb-6 text-center" style={{fontFamily: 'Poppins, sans-serif'}}>
                                 Minha Jornada
                             </h3>
                             <p className="text-[18px] md:text-[18px] text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2 text-justify lg:text-center">
-                                Comecei minha jornada na programação com o objetivo de automatizar modelagens 3D, buscando integrar programação com softwares como Inventor e Rhinoceros. 
-                                Ao longo dos anos, me aprimorei em novas tecnologias, dessa forma sigo sempre buscando aprender e me adaptar às novas tendências do mercado.
+                                Atualmente atuo na indústria naval e curso Engenharia de Software, buscando aplicar programação como ferramenta prática para resolver problemas reais de projeto.
                             </p>
                         </div>
                                                 
@@ -332,8 +345,8 @@ const Home = () => {
                                     onClick={() => setSelectedSection('experiencia')}
                                     className={`text-2xl md:text-3xl transition-all duration-300 px-4 py-2 ${
                                         selectedSection === 'experiencia'
-                                            ? 'text-pink-600 dark:text-pink-400'
-                                            : 'text-gray-900 dark:text-white hover:text-pink-500 dark:hover:text-pink-300'
+                                            ? 'text-yellow-600 dark:text-yellow-400'
+                                            : 'text-gray-900 dark:text-white hover:text-yellow-500 dark:hover:text-yellow-300'
                                     }`} 
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
@@ -354,7 +367,7 @@ const Home = () => {
                                                     : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600'
                                             }`}
                                         >
-                                            Nível Superior
+                                            Graduação
                                         </button>
                                         <button 
                                             onClick={() => setSelectedEducationType('tecnico')}
@@ -371,28 +384,22 @@ const Home = () => {
                                     {/* Conteúdo ao lado direito em md+, abaixo em telas pequenas */}
                                     <div className="flex-1 p-4 md:p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border-l-0 md:border-l-4 border-blue-600">
                                         {selectedEducationType === 'superior' && (
-                                            <div className="fade-in">
+                                             <div className="fade-in">
                                                 <h4 className="text-lg text-gray-900 dark:text-white mb-2">
-                                                    Engenharia Mecânica
+                                                    Engenharia de Software
                                                 </h4>
-                                                <p className="text-[18px] md:text-[18px] text-blue-700 dark:text-blue-300 mt-1 mb-4">
-                                                    Estácio | 2026-2031
-                                                </p>
-                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">
-                                                    Análise e Desenvolvimento de Sistemas
-                                                </h4>
-                                                <p className="text-[18px] md:text-[18px]  text-blue-700 dark:text-blue-300 mt-1">
-                                                    Uniamérica Descomplica | 2023-2026
+                                                <p className="text-[18px] md:text-[18px] text-blue-700 dark:text-blue-300 mt-1">
+                                                    Estácio | 2024-2029
                                                 </p>
                                             </div>
                                         )}
                                         {selectedEducationType === 'tecnico' && (
                                             <div className="fade-in">
                                                 <h4 className="text-lg text-gray-900 dark:text-white mb-2">
-                                                    Técnico em Eletromecânica
+                                                    Técnico em Construção Naval
                                                 </h4>
                                                 <p className="text-[18px] md:text-[18px] text-blue-700 dark:text-blue-300 mt-1">
-                                                    EEEP Raiumundo Célio Rodrigues | 2017-2019
+                                                    IFCE | 2013-2015
                                                 </p>
                                             </div>
                                         )}
@@ -409,78 +416,95 @@ const Home = () => {
                                             onClick={() => setSelectedExperienceType('inace')}
                                             className={`flex-1 px-6 py-3 rounded-lg transition-all duration-200 whitespace-nowrap ${
                                                 selectedExperienceType === 'inace'
-                                                    ? 'bg-pink-600 text-white'
-                                                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-gray-600'
+                                                    ? 'bg-yellow-500 text-white'
+                                                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-yellow-500 dark:hover:bg-gray-600'
                                             }`}
                                         >
                                             Inace
                                         </button>
                                         <button 
-                                            onClick={() => setSelectedExperienceType('guerra')}
+                                            onClick={() => setSelectedExperienceType('nz')}
                                             className={`flex-1 px-6 py-3 rounded-lg transition-all duration-200 whitespace-nowrap ${
-                                                selectedExperienceType === 'guerra'
-                                                    ? 'bg-pink-600 text-white'
-                                                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-gray-600'
+                                                selectedExperienceType === 'nz'
+                                                    ? 'bg-yellow-500 text-white'
+                                                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-yellow-500 dark:hover:bg-gray-600'
                                             }`}
                                         >
-                                            <span className="block md:hidden">G. Metais</span>
-                                            <span className="hidden md:block">Guerra Metais</span>
+                                            NZ
                                         </button>
                                         <button 
-                                            onClick={() => setSelectedExperienceType('lineship')}
+                                            onClick={() => setSelectedExperienceType('python')}
                                             className={`flex-1 px-6 py-3 rounded-lg transition-all duration-200 whitespace-nowrap ${
-                                                selectedExperienceType === 'lineship'
-                                                    ? 'bg-pink-600 text-white'
-                                                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-gray-600'
+                                                selectedExperienceType === 'python'
+                                                    ? 'bg-yellow-500 text-white'
+                                                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-yellow-500 dark:hover:bg-gray-600'
                                             }`}
                                         >
-                                            LineShip
+                                            Autônomo
+                                        </button>
+                                        <button 
+                                            onClick={() => setSelectedExperienceType('inace2')}
+                                            className={`flex-1 px-6 py-3 rounded-lg transition-all duration-200 whitespace-nowrap ${
+                                                selectedExperienceType === 'inace2'
+                                                    ? 'bg-yellow-500 text-white'
+                                                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-yellow-500 dark:hover:bg-gray-600'
+                                            }`}
+                                        >
+                                            Inace
                                         </button>
                                     </div>
 
                                     {/* Conteúdo ao lado direito em md+, abaixo em telas pequenas */}
-                                    <div className="flex-1 p-4 md:p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border-l-0 md:border-l-4 border-pink-600">
+                                    <div className="flex-1 p-4 md:p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border-l-0 md:border-l-4 border-yellow-500">
                                         {selectedExperienceType === 'inace' && (
-                                            <div className="fade-in">
-                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">
-                                                    Desenhista II
-                                                </h4>
-                                                <p className="text-[18px] md:text-[18px] text-pink-700 dark:text-pink-300 mt-1">
-                                                    Inace | 2024 - ao momento
+                                            <div className="fade-in flex flex-col items-start gap-2">
+                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">Desenhista</h4>
+                                                <p className="text-[18px] md:text-[18px] text-yellow-700 dark:text-yellow-500 mt-1">
+            
+                                                    Inace Superyachts | set de 2022 - o momento
                                                 </p>
                                                 <ul className="text-sm text-gray-600 dark:text-gray-400 mt-2 space-y-1">
                                                     <li>• Rhinoceros</li>
                                                     <li>• AutoCAD</li>
-                                                    <li>• ShipConstructor</li>
+                                                    <li>• Modelagem 3D</li>
                                                 </ul>
                                             </div>
                                         )}
-                                        {selectedExperienceType === 'guerra' && (
-                                            <div className="fade-in">
-                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">
-                                                    Desenhista Projetista
-                                                </h4>
-                                                <p className="text-[18px] md:text-[18px] text-pink-700 dark:text-pink-300 mt-1">
-                                                    Guerra Metais | 2021 - 2024
+                                        {selectedExperienceType === 'nz' && (
+                                            <div className="fade-in flex flex-col items-start gap-2">
+                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">Desenhista</h4>
+                                                <p className="text-[18px] md:text-[18px] text-yellow-700 dark:text-yellow-500 mt-1">
+                                                    NZ Empreendimentos e Investimentos LTDA | jan de 2019 - fev de 2020
                                                 </p>
                                                 <ul className="text-sm text-gray-600 dark:text-gray-400 mt-2 space-y-1">
-                                                    <li>• AutoCAD</li>
-                                                    <li>• Inventor</li>
                                                     <li>• Rhinoceros</li>
+                                                    <li>• AutoCAD</li>
+                                                    <li>• Modelagem 3D</li>
                                                 </ul>
                                             </div>
                                         )}
-                                        {selectedExperienceType === 'lineship' && (
-                                            <div className="fade-in">
-                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">
-                                                    Estágio
-                                                </h4>
-                                                <p className="text-[18px] md:text-[18px] text-pink-700 dark:text-pink-300 mt-1">
-                                                    Line Ship | 9 meses
+                                        {selectedExperienceType === 'python' && (
+                                            <div className="fade-in flex flex-col items-start gap-2">
+                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">Desenvolvedor Python</h4>
+                                                <p className="text-[18px] md:text-[18px] text-yellow-700 dark:text-yellow-500 mt-1">
+                                                    Autônomo | mar de 2020 - ago de 2022
                                                 </p>
                                                 <ul className="text-sm text-gray-600 dark:text-gray-400 mt-2 space-y-1">
+                                                    <li>• Automação de processos</li>
+                                                    <li>• Desenvolvimento de scripts</li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                        {selectedExperienceType === 'inace2' && (
+                                            <div className="fade-in flex flex-col items-start gap-2">
+                                                <h4 className="text-lg text-gray-900 dark:text-white mb-2">Desenhista</h4>
+                                                <p className="text-[18px] md:text-[18px] text-yellow-700 dark:text-yellow-500 mt-1">
+                                                    Inace Superyachts | jul de 2016 - jan de 2019
+                                                </p>
+                                                <ul className="text-sm text-gray-600 dark:text-gray-400 mt-2 space-y-1">
+                                                    <li>• Rhinoceros</li>
                                                     <li>• AutoCAD</li>
-                                                    <li>• Inventor</li>
+                                                    <li>• Modelagem 3D</li>
                                                 </ul>
                                             </div>
                                         )}
@@ -621,110 +645,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Certificates + Experience Section */}
-            <section id="certificates" className="py-10 bg-gray-50 dark:bg-gray-900">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-2xl md:text-3xl text-gray-900 dark:text-white mb-3" style={{fontFamily: 'Poppins, sans-serif'}}>
-                           Certificados
-                        </h2>
-                    </div>
-
-                    {/* Certificates Carousel with Navigation */}
-                    <div className="relative mb-16">
-                        {/* Left Arrow */}
-                        <button 
-                            onClick={prevCertificates}
-                            className="absolute left-0 top-1/3 -translate-y-1/2 z-10 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
-                        >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7M5 5v14" />
-                            </svg>
-                        </button>
-
-                        {/* Right Arrow */}
-                        <button 
-                            onClick={nextCertificates}
-                            className="absolute right-0 top-1/3 -translate-y-1/2 z-10 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
-                        >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-
-                        {/* Certificates Grid */}
-                        <div className="mx-4 md:mx-24">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                {window.innerWidth < 768
-                                    ? (
-                                        // Exibe UM certificado por vez, mas garante que o Copilot está na rotação
-                                        <div 
-                                            key={certificates[currentCertificateIndex].id} 
-                                            onClick={() => handleCertificateClick(certificates[currentCertificateIndex])}
-                                            className="group flex flex-col items-center text-center cursor-pointer"
-                                        >
-                                            <div className="aspect-[4/3] overflow-hidden relative flex items-center justify-center mb-3 w-full" style={{minHeight: '200px', maxHeight: '200px'}}>
-                                                <img 
-                                                    src={certificates[currentCertificateIndex].image}
-                                                    alt={`Certificado ${certificates[currentCertificateIndex].title}`}
-                                                    className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
-                                                    loading="eager"
-                                                    style={{width: '100%', height: '100%', margin: 0}}
-                                                />
-                                            </div>
-                                            <h3 className="text-xl text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 text-center" style={{fontFamily: 'Poppins, sans-serif'}}>
-                                                {certificates[currentCertificateIndex].title}
-                                            </h3>
-                                            <span className="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                                                {certificates[currentCertificateIndex].issuer}
-                                            </span>
-                                        </div>
-                                    )
-                                    : visibleCertificates.map((certificate, index) => (
-                                        <div 
-                                            key={certificate.id} 
-                                            onClick={() => handleCertificateClick(certificate)}
-                                            className="group flex flex-col items-center text-center cursor-pointer"
-                                            style={{ animation: `fadeInSlide 0.5s ease-out ${index * 0.1}s both` }}
-                                        >
-                                            <div className="aspect-[4/3] overflow-hidden relative flex items-center justify-center mb-3 w-full" style={{minHeight: '200px', maxHeight: '200px'}}>
-                                                <img 
-                                                    src={certificate.image}
-                                                    alt={`Certificado ${certificate.title}`}
-                                                    className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
-                                                    loading="eager"
-                                                    style={{width: '100%', height: '100%', margin: 0}}
-                                                />
-                                            </div>
-                                            <h3 className="text-xl text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 text-center" style={{fontFamily: 'Poppins, sans-serif'}}>
-                                                {certificate.title}
-                                            </h3>
-                                            <span className="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                                                {certificate.issuer}
-                                            </span>
-                                        </div>
-                                    ))}
-                            </div>
-                        </div>
-
-                        {/* Dots Indicator */}
-                        <div className="flex justify-center mt-8 space-x-2">
-                            {certificates.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentCertificateIndex(index)}
-                                    className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                                        currentCertificateIndex === index
-                                            ? 'bg-blue-600 scale-125'
-                                            : 'bg-gray-300 dark:bg-gray-600 hover:bg-blue-400'
-                                    }`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* Portfolio Section */}
             <section id="portfolio" className="py-20 bg-white dark:bg-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -735,83 +655,89 @@ const Home = () => {
                         <p className="text-[18px] md:text-[18px] text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6">
                             Conheça alguns dos projetos que desenvolvi ou que ainda estou desenvolvendo.
                         </p>
-                        
-                        {/* Categories */}
                         <div className="flex justify-center gap-8 mb-8">
                             <div className="flex flex-col items-center">
                                 <button 
-                                    onClick={() => setSelectedCategory('aplicativos')}
-                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${
-                                        selectedCategory === 'aplicativos'
-                                            ? 'text-blue-600 dark:text-blue-400'
-                                            : 'text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-300'
-                                    }`} 
+                                    onClick={() => setSelectedPortfolioTab('rendering')}
+                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${selectedPortfolioTab === 'rendering' ? 'text-blue-600 dark:text-yellow-400' : 'text-gray-900 dark:text-white hover:text-yellow-500 dark:hover:text-blue-300'}`}
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
-                                    Aplicativos
+                                    Engenharia e Design
                                 </button>
-                                {selectedCategory === 'aplicativos' && (
-                                    <div className="w-full h-1 bg-blue-600 dark:bg-blue-400 rounded mt-1"></div>
+                                {selectedPortfolioTab === 'rendering' && (
+                                    <div className="w-full h-1 bg-yellow-600 dark:bg-yellow-400 rounded mt-1"></div>
                                 )}
                             </div>
                             <div className="flex flex-col items-center">
                                 <button 
-                                    onClick={() => setSelectedCategory('rendering')}
-                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${
-                                        selectedCategory === 'rendering'
-                                            ? 'text-blue-600 dark:text-blue-400'
-                                            : 'text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-300'
-                                    }`} 
+                                    onClick={() => setSelectedPortfolioTab('otimizado')}
+                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${selectedPortfolioTab === 'otimizado' ? 'text-blue-600 dark:text-yellow-400' : 'text-gray-900 dark:text-white hover:text-yellow-500 dark:hover:text-blue-300'}`}
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
-                                    Projetos de Engenharia e Design
+                                    Desenho Otimizado
                                 </button>
-                                {selectedCategory === 'rendering' && (
-                                    <div className="w-full h-1 bg-blue-600 dark:bg-blue-400 rounded mt-1"></div>
+                                {selectedPortfolioTab === 'otimizado' && (
+                                    <div className="w-full h-1 bg-yellow-600 dark:bg-yellow-400 rounded mt-1"></div>
                                 )}
                             </div>
                         </div>
                     </div>
-
-                    {/* Content Grid */}
-                    {selectedCategory === 'rendering' ? (
-                        <div className="mt-8">
-                            {/* Aviso sobre carregamento */}
-                            <div className="mb-6 w-full max-w-6xl mx-auto px-4">
-                                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                                    <div className="flex items-start space-x-3">
-                                    
-                                        <div className="flex-1">
-                                            <p className="mt-1 text-sm text-blue-700 dark:text-blue-700" style={{fontFamily: 'Poppins, sans-serif'}}>
-                                                As imagens são carregadas conforme você navega para proporcionar a melhor qualidade visual. 
-                                                Aguarde alguns segundos para o carregamento completo.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div className="mt-8">
+                        {selectedPortfolioTab === 'rendering' && (
+                            <div className="mb-8 flex flex-col md:flex-row flex-wrap justify-center gap-6">
+                                <iframe 
+                                    src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7429037336774225920"
+                                    height="760"
+                                    width="504"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    title="Publicação incorporada 1"
+                                    className="rounded-lg shadow-lg border border-blue-200 dark:border-blue-800"
+                                    style={{maxWidth: '100%', minWidth: '320px'}}
+                                ></iframe>
+                                <iframe 
+                                    src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7397169432952897536"
+                                    height="760"
+                                    width="504"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    title="Publicação incorporada 2"
+                                    className="rounded-lg shadow-lg border border-blue-200 dark:border-blue-800"
+                                    style={{maxWidth: '100%', minWidth: '320px'}}
+                                ></iframe>
+                                <iframe 
+                                    src="https://www.linkedin.com/embed/feed/update/urn:li:share:7346748623684042752"
+                                    height="760"
+                                    width="504"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    title="Publicação incorporada 3"
+                                    className="rounded-lg shadow-lg border border-blue-200 dark:border-blue-800"
+                                    style={{maxWidth: '100%', minWidth: '320px'}}
+                                ></iframe>
+                                <iframe 
+                                    src="https://www.linkedin.com/embed/feed/update/urn:li:share:7232256464688451584"
+                                    height="760"
+                                    width="504"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    title="Publicação incorporada 4"
+                                    className="rounded-lg shadow-lg border border-blue-200 dark:border-blue-800"
+                                    style={{maxWidth: '100%', minWidth: '320px'}}
+                                ></iframe>
                             </div>
-                            
-                            <ImageCarousel images={renderingImages} onImageClick={handleRenderingImageClick} />
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {projects
-                                .filter(project => selectedCategory === 'all' || project.category === selectedCategory || selectedCategory === 'aplicativos')
-                                .map((item, index) => (
-                                <div 
-                                    key={item.id}
-                                    className="animate-slide-up"
-                                    style={{ animationDelay: `${index * 0.1}s` }}
-                                >
-                                    <ServiceCard
-                                        service={item}
-                                        onLearnMore={handleLearnMore}
-                                        onImageClick={handleImageClick}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                        )}
+                        {selectedPortfolioTab === 'otimizado' && (
+                            <div className="mb-8 flex flex-col md:flex-row flex-wrap justify-center gap-6">
+                                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7232834059930935296" height="820" width="504" frameBorder="0" allowFullScreen title="Publicação incorporada"></iframe>
+                                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7185955237566795777" height="820" width="504" frameBorder="0" allowFullScreen title="Publicação incorporada"></iframe>
+                                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7170401391633510400" height="820" width="504" frameBorder="0" allowFullScreen title="Publicação incorporada"></iframe>
+                                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7134989565827690496" height="820" width="504" frameBorder="0" allowFullScreen title="Publicação incorporada"></iframe>
+                                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7132408004129271808" height="820" width="504" frameBorder="0" allowFullScreen title="Publicação incorporada"></iframe>
+                                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7130242474588917760" height="820" width="504" frameBorder="0" allowFullScreen title="Publicação incorporada"></iframe>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </section>
 
@@ -913,11 +839,7 @@ const Home = () => {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
                         <button
-                            onClick={() => {
-                                navigator.clipboard.writeText(portfolioData.personalInfo.email);
-                                setEmailCopied(true);
-                                setTimeout(() => setEmailCopied(false), 2000);
-                            }}
+                            onClick={handleCopyEmail}
                             className="inline-flex items-center gap-2 w-40 justify-center p-3 bg-gray-800 rounded-lg hover:text-green-400 transition-all duration-300 transform hover:scale-110 hover:bg-blue-900 focus:ring-2 focus:ring-blue-400 text-white font-medium shadow-lg"
                             style={{fontFamily: 'Poppins, sans-serif'}}
                         >
@@ -925,7 +847,7 @@ const Home = () => {
                             Email
                         </button>
                         <a 
-                            href="https://www.linkedin.com/in/vitoria-gabriele-s-figueiredo-860bba296"
+                            href="https://www.linkedin.com/in/jackson-n-rocha-44b574157/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 w-40 justify-center p-3 bg-gray-800 rounded-lg hover:text-blue-400 transition-all duration-300 transform hover:scale-110 hover:bg-blue-900 focus:ring-2 focus:ring-blue-400 text-white font-medium shadow-lg"
@@ -935,7 +857,7 @@ const Home = () => {
                             LinkedIn
                         </a>
                         <a 
-                            href="https://github.com/vgabrielesf/"
+                            href="https://github.com/jacksonnr2"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 w-40 justify-center p-3 bg-gray-800 rounded-lg hover:text-gray-400 transition-all duration-300 transform hover:scale-110 hover:bg-blue-900 focus:ring-2 focus:ring-blue-400 text-white font-medium shadow-lg"

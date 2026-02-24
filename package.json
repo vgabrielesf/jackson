@@ -1,8 +1,8 @@
 {
-  "name": "vitoria-gabriele-portfolio",
+  "name": "jacksonportfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://vgabrielesf.github.io",
+  "homepage": "https://vgabrielesf.github.io/jackson",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
