@@ -247,7 +247,7 @@ const Home = () => {
                                 Olá, sou o
                             </h1>
                             <h2 className="text-3xl md:text-5xl mb-4 animate-slide-up text-orange-400" style={{fontFamily: 'Poppins, sans-serif'}}>
-                                <Typewriter text="Jackson Rocha" speed={120} pause={1200} />
+                                <Typewriter text="Jackson N. Rocha" speed={120} pause={1200} />
                             </h2>
                             <h3 className="text-xl md:text-2xl mb-8 text-blue-100 animate-slide-up" style={{fontFamily: 'Poppins, sans-serif'}}>
                                 Desenhista | Developer
@@ -659,7 +659,7 @@ const Home = () => {
                             <div className="flex flex-col items-center">
                                 <button 
                                     onClick={() => setSelectedPortfolioTab('rendering')}
-                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${selectedPortfolioTab === 'rendering' ? 'text-blue-600 dark:text-yellow-400' : 'text-gray-900 dark:text-white hover:text-yellow-500 dark:hover:text-blue-300'}`}
+                                    className={`text-lg md:text-xl  transition-all duration-300 ${selectedPortfolioTab === 'rendering' ? 'text-blue-600 dark:text-yellow-400' : 'text-gray-900 dark:text-white hover:text-yellow-500 dark:hover:text-blue-300'}`}
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
                                     Engenharia e Design
@@ -671,7 +671,7 @@ const Home = () => {
                             <div className="flex flex-col items-center">
                                 <button 
                                     onClick={() => setSelectedPortfolioTab('otimizado')}
-                                    className={`text-lg md:text-xl font-semibold transition-all duration-300 ${selectedPortfolioTab === 'otimizado' ? 'text-blue-600 dark:text-yellow-400' : 'text-gray-900 dark:text-white hover:text-yellow-500 dark:hover:text-blue-300'}`}
+                                    className={`text-lg md:text-xl transition-all duration-300 ${selectedPortfolioTab === 'otimizado' ? 'text-blue-600 dark:text-yellow-400' : 'text-gray-900 dark:text-white hover:text-yellow-500 dark:hover:text-blue-300'}`}
                                     style={{fontFamily: 'Poppins, sans-serif'}}
                                 >
                                     Desenho Otimizado

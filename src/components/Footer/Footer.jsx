@@ -64,9 +64,6 @@ const Footer = () => {
                                 </a>
                             </div>
                             <div className="space-y-2">
-                                <a href="#certificates" className="block text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium">
-                                    Certificados
-                                </a>
                                 <a href="#portfolio" className="block text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium">
                                     Projetos
                                 </a>
